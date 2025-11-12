@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Your Name</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Projects</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="Education.htm">Education</a>
+      <a href="Skill.html">Skills</a>
+      <a href="Project.html">Projects</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="projects-grid">
+      <article class="project-card">
+        <img src="proj2.jpg" alt="Database" data-full="images/project1-large.png">
+        <div class="card-info">
+          <h3>Advanced Database</h3>
+          <p>A personal project showcasing my skills and projects.</p>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <img src="proj1.jpg" alt=" Screenshotda" data-full="images/project2-large.png">
+        <div class="card-info">
+          <h3>Mysql Database</h3>
+          <p>A personal project showcasing my skills and projects.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p> 2025 Herma Wendmagegn</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img class="lightbox-img" src="" alt="">
+    <div class="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // simple lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const lightboxCaption = document.querySelector('.lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.project-card img').forEach(img => {
+      img.addEventListener('click', () => {
+        const full = img.dataset.full || img.src;
+        lightboxImg.src = full;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = img.alt;
+        lightbox.classList.remove('hidden');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.add('hidden');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImg.src = '';
+    });
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        closeBtn.click();
+      }
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeBtn.click();
+    });
+  </script>
+</body>
+</html>
